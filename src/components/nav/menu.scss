@@ -1,0 +1,9 @@
+#main-menu {
+    .nav-link {
+        color: #ccc;
+
+        &:hover {
+            color: #999;
+        }
+    }
+}

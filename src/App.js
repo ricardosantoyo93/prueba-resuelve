@@ -4,13 +4,16 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { useTranslation } from 'react-i18next'
 
 import { Nav } from './components';
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
-function App() {
+const App = () => {
+  const { t } = useTranslation();
+
   return (
     <Router>
       <Nav />
@@ -18,7 +21,6 @@ function App() {
         <Route path="/about">
           <div className="App">
             <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
               <p>
                 This is About page
               </p>
@@ -36,9 +38,8 @@ function App() {
         <Route path="/">
           <div className="App">
             <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
               <p>
-                Edit <code>src/App.js</code> and save to reload.
+                { t('hello.label') }
               </p>
               <a
                 className="App-link"
@@ -46,7 +47,7 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn React
+              { t('thankyou.label') }
               </a>
             </header>
           </div>

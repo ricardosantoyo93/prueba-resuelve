@@ -1,0 +1,14 @@
+.dropdown-menu {
+    background-color: #555;
+    min-width: initial;
+    padding: 0;
+
+    .dropdown-item {
+        color: #ccc;
+
+        &:hover {
+            color: #333;
+            background-color: #ccc;
+        }
+    }
+}
