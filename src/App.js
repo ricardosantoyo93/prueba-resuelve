@@ -4,55 +4,29 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { useTranslation } from 'react-i18next'
 
-import { Nav } from './components';
+import { Menu } from './components';
+import Login from './components/login';
 
-import logo from './logo.svg';
 import './App.scss';
 
 const App = () => {
-  const { t } = useTranslation();
-
   return (
     <Router>
-      <Nav />
-      <Switch>
-        <Route path="/about">
-          <div className="App">
-            <header className="App-header">
-              <p>
-                This is About page
-              </p>
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
-            </header>
-          </div>
-        </Route>
-        <Route path="/">
-          <div className="App">
-            <header className="App-header">
-              <p>
-                { t('hello.label') }
-              </p>
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-              { t('thankyou.label') }
-              </a>
-            </header>
-          </div>
-        </Route>
-      </Switch>
+      <Menu />
+      <div className="App">
+        <Switch>
+          <Route path="/login/admin">
+            <Login admin={true} />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }

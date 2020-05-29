@@ -2,5 +2,15 @@
   "hello.label"            : "Hello",
   "thankyou.label"         : "Thank you",
   "english.label"          : "ENG",
-  "spanish.label"          : "SPA"
+  "spanish.label"          : "SPA",
+  "user.label"             : "User",
+  "password.label"         : "Password",
+  "login.label"            : "Login",
+  "clientlogin.label"      : "Client Login",
+  "adminlogin.label"       : "Admin Login",
+  "submit.label"           : "Submit",
+  "adminq.label"           : "Admin Login",
+  "clientq.label"          : "Client Login",
+  "errorlogin.label"       : "Please fill all the fields",
+  "errorlogin2.label"      : "Invalid User or Password"     
 }

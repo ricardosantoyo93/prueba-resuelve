@@ -1,5 +1,5 @@
-import Nav from './nav/menu';
-import LanguageSelector from './nav/language-selector';
+import Menu from './menu/menu';
+import LanguageSelector from './menu/language-selector';
 
-export { Nav, LanguageSelector };
-export default { Nav, LanguageSelector };
+export { Menu, LanguageSelector };
+export default { Menu, LanguageSelector };
