@@ -6,6 +6,7 @@
   "user.label"             : "User",
   "password.label"         : "Password",
   "login.label"            : "Login",
+  "signout.label"          : "Sign Out",
   "clientlogin.label"      : "Client Login",
   "adminlogin.label"       : "Admin Login",
   "submit.label"           : "Submit",

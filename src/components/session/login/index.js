@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import API from '../../utils/api';
-import coreActions from '../../core/actions';
+import API from '../../../utils/api';
+import coreActions from '../../../core/actions';
 
 import './login.scss';
 
@@ -24,6 +24,12 @@ const Login = ({ admin, saveUserInfo }) => {
     const loginURL = admin ? "/login" : "/login/admin"; 
 
     let userRef, passRef = null;
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+    };
 
     const handleSubmit = async () => {
         const user = userRef.value, pass = passRef.value;
@@ -50,8 +56,8 @@ const Login = ({ admin, saveUserInfo }) => {
     return(
         <Form.Group className="login">
             <h3>{ label }</h3>
-            <Form.Control ref={input => userRef = input} size="lg" type="text" autoComplete="off" placeholder={t('user.label')} />
-            <Form.Control ref={input => passRef = input} size="lg" type="password" autoComplete="off" placeholder={t('password.label')} />
+            <Form.Control ref={input => userRef = input} onKeyDown={handleKeyDown} size="lg" type="text" autoComplete="off" placeholder={t('user.label')} />
+            <Form.Control ref={input => passRef = input} onKeyDown={handleKeyDown} size="lg" type="password" autoComplete="off" placeholder={t('password.label')} />
             <div className="error-message">
                 { error && 
                     <><FontAwesomeIcon icon={faExclamationCircle} /> {error}</>

@@ -10,6 +10,12 @@ const CoreReducer = (state = {}, { type, payload }) => {
                     ...payload
                 }
             }
+        case types.USER_SIGNOUT:
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: {}
+            }
         default:
             return state;
     }

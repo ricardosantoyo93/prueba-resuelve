@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,7 +9,7 @@ import './menu.scss';
 
 import LanguageSelector from './language-selector';
 
-const Menu = () => {
+const Menu = ({ isAuthenticated }) => {
   const { t } = useTranslation();
 
   return (
@@ -17,7 +18,13 @@ const Menu = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav.Item>
-            <Nav.Link as={Link} to="/login">{t('login.label')}</Nav.Link>
+            {
+              isAuthenticated ? (
+                <Nav.Link as={Link} to="/signout">{t('signout.label')}</Nav.Link>
+              ) : (
+                <Nav.Link as={Link} to="/login">{t('login.label')}</Nav.Link>
+              )
+            }
           </Nav.Item>
           <LanguageSelector />
         </Navbar.Collapse>
@@ -26,4 +33,10 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+const mapStateToProps = ({ core }) => {
+  return {
+    isAuthenticated: core.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps)(Menu);

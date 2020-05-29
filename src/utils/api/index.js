@@ -9,7 +9,7 @@ class API {
 
     async adminLogin(user, pass) {
         try {
-            const res = await axios.post('https://prueba-resuelve.herokuapp.com/users/adminLogin', {
+            const res = await axios.post(this.url + '/users/adminLogin', {
                 user: user,
                 password: md5(pass)
             });
@@ -19,7 +19,7 @@ class API {
                 let token = authorization.split(" ");
                 token = token[1];
 
-                return jwt_decode(token);
+                return { ...jwt_decode(token), token };
             } else {
                 return false;
             }

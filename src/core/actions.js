@@ -7,4 +7,10 @@ const saveUserInfo = (user) => {
     };
 }
 
-export default { saveUserInfo };
+const signout = () => {
+    return {
+        type: types.USER_SIGNOUT
+    };
+};
+
+export default { saveUserInfo, signout };

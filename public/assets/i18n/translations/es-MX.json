@@ -6,11 +6,12 @@
   "user.label"             : "Usuario",
   "password.label"         : "Contraseña",
   "login.label"            : "Iniciar Sesión",
+  "signout.label"          : "Cerrar Sesión",
   "clientlogin.label"      : "Inicio de Sesión para Clientes",
   "adminlogin.label"       : "Inicio de Sesión para Administradores",
   "submit.label"           : "Continuar",
   "adminq.label"           : "Iniciar como Admin",
   "clientq.label"          : "Iniciar como Cliente",
   "errorlogin.label"       : "Favor de llenar todos los campos",
-  "errorlogin2.label"      : "Usuario o Contraseña inválido" 
+  "errorlogin2.label"      : "Usuario o Contraseña inválidos" 
 }

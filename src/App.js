@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 
 import { Menu } from './components';
-import Login from './components/login';
+import Login from './components/session/login';
+import SignOut from './components/session/signout';
 import Protected from './components/protected';
 import Admin from './components/admin';
 
@@ -18,6 +19,9 @@ const App = () => {
       <Menu />
       <div className="App">
         <Switch>
+          <Route path="/signout" >
+            <SignOut />
+          </Route>
           <Protected path="/admin" >
             <Admin />
           </Protected>
