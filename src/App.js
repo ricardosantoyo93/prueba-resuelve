@@ -7,6 +7,8 @@ import {
 
 import { Menu } from './components';
 import Login from './components/login';
+import Protected from './components/protected';
+import Admin from './components/admin';
 
 import './App.scss';
 
@@ -16,13 +18,16 @@ const App = () => {
       <Menu />
       <div className="App">
         <Switch>
+          <Protected path="/admin" >
+            <Admin />
+          </Protected>
           <Route path="/login/admin">
             <Login admin={true} />
           </Route>
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Login />
           </Route>
         </Switch>

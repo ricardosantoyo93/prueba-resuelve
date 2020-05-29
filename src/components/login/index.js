@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
@@ -17,11 +17,13 @@ const api = new API();
 const Login = ({ admin, saveUserInfo }) => {
     const [error, setError] = useState(null);
     const { t } = useTranslation();
+    const history = useHistory();
+
     const label = admin ? t('adminlogin.label') : t('clientlogin.label');
     const labelBottom = admin ? t('clientq.label') : t('adminq.label');
     const loginURL = admin ? "/login" : "/login/admin"; 
 
-    let userRef, passRef, submitRef = null;
+    let userRef, passRef = null;
 
     const handleSubmit = async () => {
         const user = userRef.value, pass = passRef.value;
@@ -32,6 +34,11 @@ const Login = ({ admin, saveUserInfo }) => {
             const userInfo = admin ? await api.adminLogin(user, pass) : false;
             if(userInfo) {
                 saveUserInfo(userInfo);
+                if(userInfo.admin) {
+                    history.replace('/admin');
+                } else {
+                    history.replace('/client');
+                }
             } else {
                 setError(t('errorlogin2.label'));
             }
@@ -51,7 +58,7 @@ const Login = ({ admin, saveUserInfo }) => {
                 }
             </div>
             <div className="login-bottom">
-                <Button ref={input => submitRef = input} variant="secondary" onClick={handleSubmit}>{ t('submit.label') }</Button>
+                <Button variant="secondary" onClick={handleSubmit}>{ t('submit.label') }</Button>
                 <Link to={loginURL}>{ labelBottom }</Link>
             </div>
         </Form.Group>

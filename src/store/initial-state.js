@@ -1,3 +1,6 @@
 export default {
-    core: {}
+    core: {
+        isAuthenticated: false,
+        user: null
+    }
 };
