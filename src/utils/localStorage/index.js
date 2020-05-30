@@ -1,6 +1,17 @@
 import jwt_decode from 'jwt-decode';
 
 class LocalStorage {
+    instance = null;
+
+    constructor () {
+        if(this.instance !== null) {
+            return this.instance
+        }
+
+        this.instance = this;
+        return this.instance;
+    }
+
     saveToken = (token) => {
         this.setItem('_ut', token);
     }
@@ -37,4 +48,4 @@ class LocalStorage {
     }
 };
 
-export default LocalStorage;
+export default new LocalStorage();

@@ -3,8 +3,17 @@ import md5 from 'md5';
 import jwt_decode from 'jwt-decode';
 
 class API {
+    instance = null;
+
     constructor() {
+        if(this.instance !== null) {
+            return this.instance;
+        }
+        
         this.url = 'https://prueba-resuelve.herokuapp.com';
+
+        this.instance = this;
+        return this.instance;
     }
 
     async adminLogin(user, pass) {
@@ -30,4 +39,4 @@ class API {
     }
 }
 
-export default API;
+export default new API();

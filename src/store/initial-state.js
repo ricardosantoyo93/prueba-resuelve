@@ -1,6 +1,4 @@
-import LocalStorage from '../utils/localStorage';
-
-const ls = new LocalStorage();
+import ls from '../utils/localStorage';
 
 const getInitialInfo = () => {
     const initialInfo = {

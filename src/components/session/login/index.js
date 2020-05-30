@@ -7,12 +7,10 @@ import Button from 'react-bootstrap/Button';
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import API from '../../../utils/api';
+import api from '../../../utils/api';
 import coreActions from '../../../core/actions';
 
 import './login.scss';
-
-const api = new API();
 
 const Login = ({ admin, saveUserInfo }) => {
     const [error, setError] = useState(null);
