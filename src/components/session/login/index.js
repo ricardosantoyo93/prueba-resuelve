@@ -19,7 +19,7 @@ const Login = ({ admin, saveUserInfo }) => {
 
     const label = admin ? t('adminlogin.label') : t('clientlogin.label');
     const labelBottom = admin ? t('clientq.label') : t('adminq.label');
-    const loginURL = admin ? "/login" : "/login/admin"; 
+    const loginURL = admin ? "/login" : "/admin/login"; 
 
     let userRef, passRef = null;
 

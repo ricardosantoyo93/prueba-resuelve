@@ -18,7 +18,7 @@ class API {
 
     async adminLogin(user, pass) {
         try {
-            const res = await axios.post(this.url + '/users/adminLogin', {
+            const res = await axios.post(`${this.url}/users/adminLogin`, {
                 user: user,
                 password: md5(pass)
             });
@@ -29,6 +29,23 @@ class API {
                 token = token[1];
 
                 return { ...jwt_decode(token), token };
+            } else {
+                return false;
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
+
+    async getUserList(token, page = "") {
+        try {
+            const res = await axios.get(`${this.url}/users/list?page=${page}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if(res.status === 200) {
+                return res.data;
             } else {
                 return false;
             }

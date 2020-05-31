@@ -13,5 +13,11 @@
   "adminq.label"           : "Iniciar como Admin",
   "clientq.label"          : "Iniciar como Cliente",
   "errorlogin.label"       : "Favor de llenar todos los campos",
-  "errorlogin2.label"      : "Usuario o Contraseña inválidos" 
+  "errorlogin2.label"      : "Usuario o Contraseña inválidos",
+  "protected.label"        : "Esta es una página protegida",
+  "client.label"           : "Cliente",
+  "movements.label"        : "Movimientos",
+  "name.label"             : "Nombre",
+  "active.label"           : "Activo",
+  "yes.label"              : "Sí"
 }

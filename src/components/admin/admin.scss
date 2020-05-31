@@ -1,0 +1,13 @@
+div.user-list-wrapper {
+    margin: 5%;
+
+    table {
+        color: white;
+    }
+}
+
+@media (max-width: 768px) {
+    div.user-list-wrapper {
+        margin: 5% 0;
+    }
+}

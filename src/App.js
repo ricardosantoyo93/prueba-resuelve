@@ -9,6 +9,7 @@ import { Menu } from './components';
 import Login from './components/session/login';
 import SignOut from './components/session/signout';
 import Protected from './components/protected';
+import CheckRedirect from './components/protected/checkRedirect';
 import Admin from './components/admin';
 
 import './App.scss';
@@ -22,17 +23,23 @@ const App = () => {
           <Route path="/signout" >
             <SignOut />
           </Route>
-          <Protected path="/admin" >
+          <Protected exact path="/admin" >
             <Admin />
           </Protected>
-          <Route path="/login/admin">
+          <Protected exact path="/admin/p" >
+            <Admin />
+          </Protected>
+          <Protected path="/admin/p/:p" >
+            <Admin />
+          </Protected>
+          <Route path="/admin/login">
             <Login admin={true} />
           </Route>
           <Route path="/login">
             <Login />
           </Route>
           <Route exact path="/">
-            <Login />
+            <CheckRedirect />
           </Route>
         </Switch>
       </div>

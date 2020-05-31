@@ -13,5 +13,11 @@
   "adminq.label"           : "Admin Login",
   "clientq.label"          : "Client Login",
   "errorlogin.label"       : "Please fill all the fields",
-  "errorlogin2.label"      : "Invalid User or Password"     
+  "errorlogin2.label"      : "Invalid User or Password",
+  "protected.label"        : "This is a protected page",
+  "client.label"           : "Client",
+  "movements.label"        : "Movements",
+  "name.label"             : "Name",
+  "active.label"           : "Active",
+  "yes.label"              : "Yes"
 }

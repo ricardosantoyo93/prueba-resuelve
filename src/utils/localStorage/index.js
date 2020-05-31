@@ -33,6 +33,10 @@ class LocalStorage {
         return userInfo;
     }
 
+    get token() {
+        return this.getItem('_ut');
+    }
+
     // These two methods are made to keep using the LocalStorage class instead of localStorage alone
     // In a way of 'extending' localStorage and keep using the same instance of the class
     setItem = (key = "", item = "") => {
