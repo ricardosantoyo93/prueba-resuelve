@@ -13,5 +13,6 @@ const getInitialInfo = () => {
 export default {
     core: {
         ...getInitialInfo()
-    }
+    },
+    current: null
 };

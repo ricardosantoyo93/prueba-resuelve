@@ -8,7 +8,7 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import api from '../../../utils/api';
-import coreActions from '../../../core/actions';
+import coreActions from '../../../store/core/actions';
 
 import './login.scss';
 

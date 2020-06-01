@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import CoreActions from '../../../core/actions';
+import CoreActions from '../../../store/core/actions';
 
 const SignOut = ({ signout }) => {
     signout();

@@ -1,5 +1,5 @@
 import types from './action-types';
-import ls from '../utils/localStorage';
+import ls from '../../utils/localStorage';
 
 const saveUserInfo = (user) => {
     ls.saveToken(user.token);
