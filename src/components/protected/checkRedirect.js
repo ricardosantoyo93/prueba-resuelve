@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-const CheckRedirect = ({ isAuthenticated, user }) => {
+const CheckRedirect = ({ isAuthenticated, isAdmin }) => {
     return (
         isAuthenticated ? (
-            user.admin ? (
+            isAdmin ? (
                 <Redirect to="/admin" />
             ) : (
                 <Redirect to="/client" />
@@ -17,7 +17,7 @@ const CheckRedirect = ({ isAuthenticated, user }) => {
 const mapStateToProps = ({ core }) => {
     return {
         isAuthenticated: core.isAuthenticated,
-        user: core.user
+        isAdmin: core.user ? core.user.admin : false
     }
 };
 
