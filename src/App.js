@@ -12,6 +12,7 @@ import Protected from './components/protected';
 import ProtectedAdmin from './components/protected/admin';
 import CheckRedirect from './components/protected/checkRedirect';
 import Admin from './components/admin';
+import ClientAdmin from './components/admin/client';
 
 import './App.scss';
 
@@ -32,6 +33,15 @@ const App = () => {
           </ProtectedAdmin>
           <ProtectedAdmin path="/admin/p/:p" >
             <Admin />
+          </ProtectedAdmin>
+          <ProtectedAdmin exact path="/admin/client" >
+            <ClientAdmin />
+          </ProtectedAdmin>
+          <ProtectedAdmin exact path="/admin/client/:uid" >
+            <ClientAdmin />
+          </ProtectedAdmin>
+          <ProtectedAdmin exact path="/admin/client/:uid/p/:p" >
+            <ClientAdmin />
           </ProtectedAdmin>
           <Route path="/admin/login">
             <Login admin={true} />

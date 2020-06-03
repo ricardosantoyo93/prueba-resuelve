@@ -12,6 +12,7 @@ const saveUserInfo = (user) => {
 
 const signout = () => {
     ls.deleteToken();
+    ls.removeItem('_ct');
 
     return {
         type: types.USER_SIGNOUT

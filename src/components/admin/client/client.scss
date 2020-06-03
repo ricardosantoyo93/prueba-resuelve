@@ -1,0 +1,38 @@
+div.admin-client-info-wrapper {
+    margin: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+
+    table {
+        .orderBy {
+            cursor: pointer;
+            svg {
+                color: #bbb;
+            }
+        }
+    }
+
+    .page-link {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: rgba(255, 255, 255, 0.05);
+
+        a {
+            color: #4495d4;
+            &:hover {
+                color: #326a96;
+            }
+        }
+    }
+
+    .page-item.active .page-link{
+        background-color: #1f4d70;
+    }
+}
+
+@media (max-width: 768px) {
+    div.admin-client-info-wrapper {
+        margin: 5% 0;
+    }
+}

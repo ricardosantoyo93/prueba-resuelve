@@ -19,5 +19,6 @@
   "movements.label"        : "Movimientos",
   "name.label"             : "Nombre",
   "active.label"           : "Activo",
-  "yes.label"              : "Sí"
+  "yes.label"              : "Sí",
+  "loading.label"          : "Cargando..."
 }

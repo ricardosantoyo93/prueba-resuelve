@@ -14,7 +14,8 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 const Admin = ({ saveCurrentInfo}) => {
     const { t } = useTranslation();
-    const { p } = useParams();
+    let { p } = useParams();
+    p = Number.isInteger(p) ? p : 1;
 
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -34,7 +35,7 @@ const Admin = ({ saveCurrentInfo}) => {
                 return {
                     name: { 
                         desc: `${item.nombre} ${item.segundo_nombre} ${item.apellido} ${item.segundo_apellido}`,
-                        url: `/admin/movements/${item.uid}`
+                        url: `/admin/client/${item.uid}`
                     },
                     email: item.email,
                     active: {

@@ -24,6 +24,15 @@ const ReTable = ({ columns, content, options }) => {
             return <Link to={item.url}>{item.desc}</Link>;
         }
 
+        if(item.date) {
+            const date = new Date(item.value);
+            const dd = date.getDate();
+            const mm = date.getMonth() + 1;
+            const yy = date.getFullYear();
+            
+            return `${dd}/${mm}/${yy}`;
+        }
+
         return item;
     }
 

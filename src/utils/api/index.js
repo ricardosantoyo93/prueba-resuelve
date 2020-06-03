@@ -54,6 +54,23 @@ class API {
             return false;
         }
     }
+
+    async getClientMovements(token, uid, page = "") {
+        try {
+            const res = await axios.get(`${this.url}/users/${uid}/movements?page=${page}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if(res.status === 200) {
+                return res.data;
+            } else {
+                return false;
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
 }
 
 export default new API();
