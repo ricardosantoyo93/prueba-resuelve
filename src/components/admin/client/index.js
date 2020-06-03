@@ -17,9 +17,19 @@ const Client = ({ records }) => {
     const { uid } = useParams();
     const { t } = useTranslation();
     const { history } = useHistory();
+
+    // ! The api is not returning a jwt token for the client in the headers, 
+    // ! that's why I need to look for their info in the past api call for the users list.
+    // ! And that's the reason I need to store the records in localStorage
+    const client = records.find((item) => {
+        return item.uid === uid;
+    });
+
+    if(!client) {
+        history.replace('/admin');
+    }
     
-    const [client, setClient] = useState();
-    const [mov, setMovements] = useState([]);
+    const [movements, setMovements] = useState();
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [order, setOrder] = useState('asc');
@@ -28,24 +38,12 @@ const Client = ({ records }) => {
     p = !Number.isNaN(Number(p)) ? p : 1;
     const loading = t('loading.label');
 
-    const isValidUID = records.find((item) => {
-        return item.uid === uid;
-    });
-
-    if(!isValidUID) {
-        history.replace('/admin');
-    }
-
     const fetchClientMovements = async () => {
-        const movements = await api.getClientMovements(ls.token, uid, p);
-        if(movements) {
-            const cl = records.find((item) => {
-                return item.uid === uid;
-            });
-
+        const mov = await api.getClientMovements(ls.token, uid, p);
+        if(mov) {
             const currency = await api.getCurrencyConversion();
 
-            const m = movements.records.map((item) => {
+            const m = mov.records.map((item) => {
                 return {
                     amount: {
                         amount: true,
@@ -66,9 +64,8 @@ const Client = ({ records }) => {
                 }
             });
 
-            setPage(movements.pagination.page);
-            setTotalPages(movements.pagination.totalPages);
-            setClient(cl);
+            setPage(mov.pagination.page);
+            setTotalPages(mov.pagination.totalPages);
             setMovements(m);
             setCurrency("usd");
         }
@@ -79,7 +76,7 @@ const Client = ({ records }) => {
     }, [p]);
 
     const handleSort = (key) => {
-        const sortedArray = mov.sort((a, b) => {
+        const sortedArray = movements.sort((a, b) => {
             if(key === "description") {
                 if (a[key] < b[key]) {
                     return order === "desc" ? -1 : 1;
@@ -126,7 +123,7 @@ const Client = ({ records }) => {
     ];
 
     const changeCurrency = () => {
-        const newArray = mov.map((item) => {
+        const newArray = movements.map((item) => {
             if(currency === "usd") {
                 return {...item, amount: {
                     ...item.amount,
@@ -151,11 +148,12 @@ const Client = ({ records }) => {
 
     return (
         <div className="admin-client-info-wrapper">
-            { client ? (
+            { movements ? (
                 <>
                     <h2> { client.nombre } { client.apellido } { client.segundo_apellido }</h2>
+                    <p><i>{ client.email }</i></p>
                     <br />
-                    <Table columns={columns} content={mov} options={{ order }} />
+                    <Table columns={columns} content={movements} options={{ order }} />
                     <span>
                         <Pagination page={page} totalPages={totalPages} options={{ path: `/admin/client/${uid}/p` }} />
                         <Button type="button" size="sm" variant="dark" onClick={changeCurrency}>
