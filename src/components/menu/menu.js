@@ -9,7 +9,7 @@ import './menu.scss';
 
 import LanguageSelector from './language-selector';
 
-const Menu = ({ isAuthenticated }) => {
+const Menu = ({ isAuthenticated, isAdmin }) => {
   const { t } = useTranslation();
 
   return (
@@ -17,6 +17,13 @@ const Menu = ({ isAuthenticated }) => {
       <Navbar bg='dark' sticky="top" id="main-menu">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+          <Nav.Item>
+            {
+              isAuthenticated && isAdmin ? (
+                <Nav.Link as={Link} to="/admin">{t('users.label')}</Nav.Link>
+              ) : null
+            }
+          </Nav.Item>
           <Nav.Item>
             {
               isAuthenticated ? (
@@ -35,7 +42,8 @@ const Menu = ({ isAuthenticated }) => {
 
 const mapStateToProps = ({ core }) => {
   return {
-    isAuthenticated: core.isAuthenticated
+    isAuthenticated: core.isAuthenticated,
+    isAdmin: core.user ? core.user.admin : false
   }
 }
 

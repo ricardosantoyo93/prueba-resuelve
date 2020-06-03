@@ -15,13 +15,25 @@ const ReTable = ({ columns, content, options }) => {
         return (<th className="orderBy" onClick={item.cb ? item.cb : ()=>{}}>{ item.desc } { item.sort ? <FontAwesomeIcon size="xs" icon={order === "asc" ? faLongArrowAltDown : faLongArrowAltUp} /> : null }</th>);
     });
 
+    const numberWithCommas = (x) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     const checkItem = (item) => {
         if(item.yesno) {
             return item.value ? t('yes.label') : "No";
         }
 
         if(item.url) {
-            return <Link to={item.url}>{item.desc}</Link>;
+            return <Link to={item.url}>{item.value}</Link>;
+        }
+
+        if(item.dc) {
+            return item.value === "credit" ? t('credit.label') : t('debit.label')
+        }
+
+        if(item.amount) {
+            return <i>{ `$ ${numberWithCommas(item.value)} ${item.currency}` }</i>
         }
 
         if(item.date) {

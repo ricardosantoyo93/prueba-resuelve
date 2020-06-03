@@ -71,6 +71,21 @@ class API {
             return false;
         }
     }
+
+    async getCurrencyConversion() {
+        try {
+            const res = await axios.get(`${this.url}/money/conversion`);
+
+            if(res.status === 200) {
+                return res.data;
+            } else {
+                return false;
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
 }
 
 export default new API();

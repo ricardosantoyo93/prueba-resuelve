@@ -29,6 +29,12 @@ div.admin-client-info-wrapper {
     .page-item.active .page-link{
         background-color: #1f4d70;
     }
+
+    span {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 @media (max-width: 768px) {

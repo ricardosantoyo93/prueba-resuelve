@@ -13,6 +13,7 @@ const saveUserInfo = (user) => {
 const signout = () => {
     ls.deleteToken();
     ls.removeItem('_ct');
+    ls.removeItem('_pag');
 
     return {
         type: types.USER_SIGNOUT

@@ -20,5 +20,12 @@
   "name.label"             : "Name",
   "active.label"           : "Active",
   "yes.label"              : "Yes",
-  "loading.label"          : "Loading..."
+  "loading.label"          : "Loading...",
+  "amount.label"           : "Amount",
+  "type.label"             : "Type",
+  "description.label"      : "Description",
+  "date.label"             : "Date",
+  "credit.label"           : "Credit",
+  "debit.label"            : "Debit",
+  "users.label"        : "Users"
 }

@@ -15,7 +15,7 @@ export default {
         ...getInitialInfo()
     },
     current: {
-        pagination: null,
+        pagination: JSON.parse(ls.getItem('_pag')),
         records: JSON.parse(ls.getItem('_ct'))
     }
 };

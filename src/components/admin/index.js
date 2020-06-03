@@ -15,18 +15,14 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 const Admin = ({ saveCurrentInfo}) => {
     const { t } = useTranslation();
     let { p } = useParams();
-    p = Number.isInteger(p) ? p : 1;
+    p = !Number.isNaN(Number(p)) ? p : 1;
 
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [order, setOrder] = useState('asc');
-    const [clients, setClients] = useState([
-            {
-                name: "",
-                email: "",
-                active: "",
-            }
-        ]);
+    const [clients, setClients] = useState();
+
+    const loading = t('loading.label');
 
     const updateTable = async () => {
         const userList = await api.getUserList(ls.token, p);
@@ -34,7 +30,7 @@ const Admin = ({ saveCurrentInfo}) => {
             const cl = userList.records.map((item) => {
                 return {
                     name: { 
-                        desc: `${item.nombre} ${item.segundo_nombre} ${item.apellido} ${item.segundo_apellido}`,
+                        value: `${item.nombre} ${item.segundo_nombre} ${item.apellido} ${item.segundo_apellido}`,
                         url: `/admin/client/${item.uid}`
                     },
                     email: item.email,
@@ -65,14 +61,24 @@ const Admin = ({ saveCurrentInfo}) => {
         fetchClients();
     }, [p]);
 
-    const handleSort = () => {
+    const handleSort = (key) => {
         const sortedArray = clients.sort((a, b) => {
-            if (a.name.desc < b.name.desc) {
+            if(key === "email") {
+                if (a[key] < b[key]) {
+                    return order === "desc" ? -1 : 1;
+                }
+                if (a[key] > b[key]) {
+                    return order === "desc" ? 1 : -1;
+                }
+            }
+
+            if (a[key].value < b[key].value) {
                 return order === "desc" ? -1 : 1;
             }
-            if (a.name.desc > b.name.desc) {
+            if (a[key].value > b[key].value) {
                 return order === "desc" ? 1 : -1;
             }
+
             return 0;
         });
 
@@ -84,20 +90,28 @@ const Admin = ({ saveCurrentInfo}) => {
         {
             desc: t('name.label'),
             sort: true,
-            cb: handleSort
+            cb: () => handleSort("name")
         },
         {
-            desc: "Email"
+            desc: "Email",
+            sort: true,
+            cb: () => handleSort("email")
         },
         {
-            desc: t('active.label')
+            desc: t('active.label'),
+            sort: true,
+            cb: () => handleSort("active")
         }
     ];
 
     return (
         <div className="user-list-wrapper">
-            <Table columns={columns} content={clients} options={{order}} />
-            <Pagination page={page} totalPages={totalPages} options={{ path: '/admin/p' }} />
+            { clients ? (
+                <>
+                    <Table columns={columns} content={clients} options={{order}} />
+                    <Pagination page={page} totalPages={totalPages} options={{ path: '/admin/p' }} />
+                </>
+            ) : loading}
         </div>
     );
 }
