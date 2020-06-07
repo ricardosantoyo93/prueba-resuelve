@@ -27,5 +27,6 @@
   "date.label"             : "Fecha",
   "credit.label"           : "Crédito",
   "debit.label"            : "Débito",
-  "users.label"        : "Usuarios"
+  "users.label"            : "Usuarios",
+  "wait.label"             : "Por Favor Espere"
 }

@@ -1,3 +1,5 @@
+import jwt_decode from 'jwt-decode';
+
 import ls from '../utils/localStorage';
 
 const getInitialInfo = () => {
@@ -10,12 +12,15 @@ const getInitialInfo = () => {
     return initialInfo;
 };
 
+const _pag = ls.getItem('_pag');
+const _ct = ls.getItem('_ct');
+
 export default {
     core: {
         ...getInitialInfo()
     },
     current: {
-        pagination: JSON.parse(ls.getItem('_pag')),
-        records: JSON.parse(ls.getItem('_ct'))
+        pagination: _pag ? jwt_decode(_pag) : {},
+        records: _ct ? jwt_decode(_ct) : {}
     }
 };

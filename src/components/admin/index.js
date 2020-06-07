@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
+import LoadingScreen from 'react-loading-screen';
 
 import api from '../../utils/api';
 import ls from '../../utils/localStorage';
@@ -21,8 +22,6 @@ const Admin = ({ saveCurrentInfo}) => {
     const [totalPages, setTotalPages] = useState(0);
     const [order, setOrder] = useState('asc');
     const [clients, setClients] = useState();
-
-    const loading = t('loading.label');
 
     const updateTable = async () => {
         const userList = await api.getUserList(ls.token, p);
@@ -111,7 +110,15 @@ const Admin = ({ saveCurrentInfo}) => {
                     <Table columns={columns} content={clients} options={{order}} />
                     <Pagination page={page} totalPages={totalPages} options={{ path: '/admin/p' }} />
                 </>
-            ) : loading}
+            ) : (
+                <LoadingScreen
+                    loading={true}
+                    bgColor='#282c34'
+                    spinnerColor='#9ee5f8'
+                    textColor='#fff'
+                    text={ t('wait.label') }
+                /> 
+            )}
         </div>
     );
 }

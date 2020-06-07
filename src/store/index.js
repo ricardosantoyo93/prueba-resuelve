@@ -13,14 +13,15 @@ const setStore = () => {
         return currentStore;
     }
         
-    return createStore(
+    const store = createStore(
         combinedReducers, 
-        initialState, 
+        initialState,
         compose(
-            applyMiddleware(logger),
-            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+            applyMiddleware(logger)
         )
     );
+
+    return store;
 }
 
 export default setStore();

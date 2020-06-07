@@ -38,6 +38,28 @@ class API {
         }
     }
 
+    async userLogin(user, pass) {
+        try {
+            const res = await axios.post(`${this.url}/users/login`, {
+                email: user,
+                password: md5(pass)
+            });
+
+            if(res.headers.authorization) {
+                const { authorization } = res.headers;
+                let token = authorization.split(" ");
+                token = token[1];
+
+                return { ...jwt_decode(token), token };
+            } else {
+                return false;
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
+
     async getUserList(token, page = "") {
         try {
             const res = await axios.get(`${this.url}/users/list?page=${page}`, {
@@ -58,6 +80,23 @@ class API {
     async getClientMovements(token, uid, page = "") {
         try {
             const res = await axios.get(`${this.url}/users/${uid}/movements?page=${page}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if(res.status === 200) {
+                return res.data;
+            } else {
+                return false;
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
+
+    async getMyMovements(token, page = "") {
+        try {
+            const res = await axios.get(`${this.url}/users/myMovements?page=${page}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
 

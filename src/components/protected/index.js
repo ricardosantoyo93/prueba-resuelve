@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Protected = ({ isAuthenticated, children, ...rest }) => {
+const Protected = ({ isAuthenticated, isClient, children, ...rest }) => {
     return (
         <Route
             {...rest}
             render={({ location }) =>
-                isAuthenticated ? (
+                isAuthenticated && isClient ? (
                 children
             ) : (
                 <Redirect
@@ -24,7 +24,8 @@ const Protected = ({ isAuthenticated, children, ...rest }) => {
 
 const mapStateToProps = ({ core }) => {
     return {
-        isAuthenticated: core.isAuthenticated
+        isAuthenticated: core.isAuthenticated,
+        isClient: !core.user.admin
     };
 }
 

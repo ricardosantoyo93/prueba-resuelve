@@ -2,7 +2,8 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import { Menu } from './components';
@@ -11,7 +12,9 @@ import SignOut from './components/session/signout';
 import Protected from './components/protected';
 import ProtectedAdmin from './components/protected/admin';
 import CheckRedirect from './components/protected/checkRedirect';
+import CheckSession from './components/protected/checkSession';
 import Admin from './components/admin';
+import Client from './components/client';
 import ClientAdmin from './components/admin/client';
 
 import './App.scss';
@@ -22,9 +25,6 @@ const App = () => {
       <Menu />
       <div className="App">
         <Switch>
-          <Route path="/signout" >
-            <SignOut />
-          </Route>
           <ProtectedAdmin exact path="/admin" >
             <Admin />
           </ProtectedAdmin>
@@ -43,15 +43,29 @@ const App = () => {
           <ProtectedAdmin exact path="/admin/client/:uid/p/:p" >
             <ClientAdmin />
           </ProtectedAdmin>
-          <Route path="/admin/login">
+          
+          <Protected exact path="/mymovements" >
+            <Client />
+          </Protected>
+          <Protected exact path="/mymovements/p/:p" >
+            <Client />
+          </Protected>
+
+          <CheckSession path="/admin/login">
             <Login admin={true} />
-          </Route>
-          <Route path="/login">
+          </CheckSession>
+          <CheckSession path="/login">
             <Login />
+          </CheckSession>
+          <Route path="/signout" >
+            <SignOut />
           </Route>
+
           <Route exact path="/">
             <CheckRedirect />
           </Route>
+
+          <Redirect to='/' />
         </Switch>
       </div>
     </Router>

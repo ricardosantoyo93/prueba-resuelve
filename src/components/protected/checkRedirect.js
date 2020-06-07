@@ -8,7 +8,7 @@ const CheckRedirect = ({ isAuthenticated, isAdmin }) => {
             isAdmin ? (
                 <Redirect to="/admin" />
             ) : (
-                <Redirect to="/client" />
+                <Redirect to="/mymovements" />
             )
         ) : <Redirect to="/login" />
     );

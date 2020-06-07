@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import LoadingScreen from 'react-loading-screen';
 
 import Button from 'react-bootstrap/Button';
 
@@ -161,7 +162,15 @@ const Client = ({ records }) => {
                         </Button>
                     </span>
                 </>
-            ) : loading }
+            ) : (
+                <LoadingScreen
+                    loading={true}
+                    bgColor='#282c34'
+                    spinnerColor='#9ee5f8'
+                    textColor='#fff'
+                    text={ t('wait.label') }
+                /> 
+            ) }
         </div>
     );
 };
