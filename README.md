@@ -18,13 +18,13 @@ You need to install all the `npm` packages, to do this, please run the next comm
 
   
 
-### `npm install`
+`npm install`
 
   
 
-Then we can go ahead and run the project with
+Then we can go ahead and run the project using
 
-### `npm start`
+`npm start`
 
 The local server will start at `localhost:3000`, and we can start using the app.
 
