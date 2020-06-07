@@ -2,11 +2,17 @@ import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import { Link } from 'react-router-dom';
 
+/**
+ * 
+ * @param {Object} props
+ * @param {Number} props.page The current page
+ * @param {Number} props.totalPages The total amount of pages that can be displayed
+ * @param {Object} props.options Extra options, like the path the buttons will redirect to 
+ */
 const Pag = ({ page, totalPages, options }) => {
     if(page === 0) {
         return null
     }
-
 
     const { path } = options;
 

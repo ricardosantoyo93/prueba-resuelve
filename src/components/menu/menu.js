@@ -9,6 +9,12 @@ import './menu.scss';
 
 import LanguageSelector from './language-selector';
 
+/**
+ * Component to display the top menu and the language selector
+ * @param {Object} props
+ * @param {Boolean} props.isAuthenticated if the user is authenticated or not
+ * @param {Boolean} props.isAdmin if the user is admin or not 
+ */
 const Menu = ({ isAuthenticated, isAdmin }) => {
   const { t } = useTranslation();
 

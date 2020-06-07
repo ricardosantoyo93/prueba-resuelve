@@ -15,8 +15,12 @@ import coreActions from '../../../store/core/actions';
 
 import './login.scss';
 
-// Timmothy55@gmail.com
-
+/**
+ * Component to render the login form for clients or admins
+ * @param {Object} props
+ * @param {Boolean} props.admin To load the admin login or the client login
+ * @param {Function} props.saveUserInfo Redux action to save the current user info in the state 
+ */
 const Login = ({ admin, saveUserInfo }) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -36,17 +40,22 @@ const Login = ({ admin, saveUserInfo }) => {
         }
     };
 
+    /**
+     * Calls the api with the given user and password, and then redirects to their proper screens
+     * Otherwise it will display an error message
+     */
     const handleSubmit = async () => {
         setLoading(true);
         const user = userRef.value, pass = passRef.value;
 
         if(user !== '' && pass !== '') {
             setError(null);
-            // TODO: create client login
             const userInfo = admin ? await api.adminLogin(user, pass) : await api.userLogin(user, pass);
             
             if(userInfo) {
                 saveUserInfo(userInfo);
+                // Redirects to the admin dashboard if the user is an admin
+                // or to mymovements page if it's a client
                 if(userInfo.admin) {
                     history.replace('/admin');
                 } else {

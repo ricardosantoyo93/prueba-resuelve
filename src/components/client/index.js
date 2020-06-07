@@ -14,6 +14,13 @@ import CurrentActions from '../../store/current/actions';
 
 import './client.scss';
 
+/**
+ * Component to see the client's latest movements
+ * This one is similar to the client component of the admin side, but I decided to make it a
+ * different component so any changes in the way the info is displayed won't be affected to the other side
+ * @param {Object} props
+ * @param {Function} props.saveCurrentInfo Redux action to update the current info in the state 
+ */
 const Client = ({ saveCurrentInfo }) => {
     let { p } = useParams();
     const { t } = useTranslation();
@@ -27,11 +34,16 @@ const Client = ({ saveCurrentInfo }) => {
 
     p = !Number.isNaN(Number(p)) ? p : 1;
 
+    /**
+     * Method that calls the api to get the latest movements of the client given its token
+     */
     const fetchClientMovements = async () => {
         const mov = await api.getMyMovements(ls.token, p);
         if(mov) {
+            // Calling the currency api to know the values in whick I have to multiply
             const currency = await api.getCurrencyConversion();
 
+            // I create an array of objects whit just the info I actually need to be displayed
             const m = mov.records.map((item) => {
                 return {
                     amount: {
@@ -65,10 +77,15 @@ const Client = ({ saveCurrentInfo }) => {
         }
     };
 
+    // Calling the fetchClientMovements method after the component renders and every time the page changes
     useEffect(() => {
         fetchClientMovements();
     }, [p]);
 
+    /**
+     * Method to sort the movements info. It will trigger a re-render
+     * @param {String} key The name of the key of the content object
+     */
     const handleSort = (key) => {
         const sortedArray = movements.sort((a, b) => {
             if(key === "description") {
@@ -93,6 +110,7 @@ const Client = ({ saveCurrentInfo }) => {
         setOrder(order === "desc" ? "asc" : "desc");
     }
 
+    // Columns info to be sent to the Table component
     const columns = [
         {
             desc: t('amount.label'),
@@ -116,6 +134,7 @@ const Client = ({ saveCurrentInfo }) => {
         }
     ];
 
+    // This will re-render the table with the updated currency conversion
     const changeCurrency = () => {
         const newArray = movements.map((item) => {
             if(currency === "usd") {

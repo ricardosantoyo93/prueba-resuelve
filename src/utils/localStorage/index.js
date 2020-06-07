@@ -1,5 +1,9 @@
 import jwt_decode from 'jwt-decode';
 
+/**
+ * LocalStorage class meant for all the calls to localStorage in the app
+ * Decryts the info using JWT when needed
+ */
 class LocalStorage {
     instance = null;
 
@@ -33,6 +37,7 @@ class LocalStorage {
         return userInfo;
     }
 
+    // Getter for the user token
     get token() {
         return this.getItem('_ut');
     }

@@ -7,18 +7,36 @@ import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
+/**
+ * 
+ * @param {Object} props
+ * @param {Array} props.columns Columns to be displayed, with their metadata
+ * @param {Array} props.content The content that will fill the table
+ * @param {Object} props.options Extra options for the table, like the initial order the content is being displayed
+ */
 const ReTable = ({ columns, content, options }) => {
     const { order } = options;
     const { t } = useTranslation();
 
+    // Creating the head of the table
+    // Adding sort callbacks if they are sortable
     const thead = columns.map((item) => {
-        return (<th className="orderBy" onClick={item.cb ? item.cb : ()=>{}}>{ item.desc } { item.sort ? <FontAwesomeIcon size="xs" icon={order === "asc" ? faLongArrowAltDown : faLongArrowAltUp} /> : null }</th>);
+        return (
+            <th className="orderBy" onClick={item.cb ? item.cb : ()=>{}}>
+                { item.desc } { item.sort ? <FontAwesomeIcon size="xs" icon={order === "asc" ? faLongArrowAltDown : faLongArrowAltUp} /> : null }
+            </th>
+        );
     });
 
+    // Method to split a number with commas
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    /**
+     * Checks the item metadata to see what and how to render it
+     * @param {Object} item Current item to be rendered
+     */
     const checkItem = (item) => {
         if(item.yesno) {
             return item.value ? t('yes.label') : "No";
@@ -48,6 +66,7 @@ const ReTable = ({ columns, content, options }) => {
         return item;
     }
 
+    // Creating the body of the table
     const tbody = content.map((item, index) => {
             return (
                 <tr key={index}>

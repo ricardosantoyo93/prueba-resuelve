@@ -9,9 +9,13 @@ import ls from '../../../utils/localStorage';
 
 import './language-selector.scss';
 
+/**
+ * Component for the Language Selector
+ */
 const LanguageSelector = () => {
     const { t, i18n } = useTranslation();
 
+    // Inits the language, pulls any info in localStorage, otherwise it defaults to 'en'
     const initLanguage = useCallback(() => {
         const lan = ls.getItem('lan');
         if(lan !== '' || lan !== null) {
@@ -19,10 +23,12 @@ const LanguageSelector = () => {
         }
     }, [i18n]);
 
+    // Calling initLanguage after the components mounts
     useEffect(() => {
         initLanguage();
     }, [initLanguage]);
 
+    // Changes the language and stores the configuration in localStorage
     const changeLanguage = (lan) => {
         i18n.changeLanguage(lan);
         ls.setItem('lan', lan);

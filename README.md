@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project made in React
 
-## Available Scripts
+[API Documentation and App requirements](https://prueba-resuelve.herokuapp.com/frontend)
 
-In the project directory, you can run:
+
+## Running the Project
+  
+
+Clone this repo to your machine.
+
+>This project is already built, so you can go to the folder `build` and serve it with your favorite http server. You can then skip to `Using the App`. If you want instead to run the code, keep reading.
+
+
+
+  (Assuming `npm` is installed)
+
+You need to install all the `npm` packages, to do this, please run the next command while being in the root folder:
+
+  
+
+### `npm install`
+
+  
+
+Then we can go ahead and run the project with
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The local server will start at `localhost:3000`, and we can start using the app.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Using the App
 
-### `npm test`
+This is the screen you will see if you run the project successfully:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Imgur](https://i.imgur.com/4DgBCX0.png)
 
-### `npm run build`
+We can identify some main aspects here:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ 1. Login hyperlink
+	 This will take you back to the Login screen.
+ 2. Language Selector
+	 You can change the language of the app here, just click it and select either English or Spanish.
+ 3. Login form
+	 Here you can submit the client info (email and password) to login. It will show you an error if any field is empty, or if the info submitted is wrong.
+4. Admin Login redirect
+	It will redirect you to the admin login screen. Which is similar but exclusive to admins. **Client info won't work on admin login, and admin info won't work on client login**.
+	
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Client Path
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+After you login with the proper client info, you will see a screen like this
 
-### `npm run eject`
+![Imgur](https://i.imgur.com/T3xj9ou.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ 1. Sign Out button
+	 Like the name says, it will sign you out and redirect you to the login screen
+2. Client info and movements table
+	You can find the client's name, email and a table of their latest movements. Which you can sort by any of its columns.
+3. Pagination
+	The movement info will be divided into multiple pages, here you can navigate through all of them.
+4. Currency button
+	You can change the currency if you want, between USD and MXN.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Admin Path
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You will see a screen like this if you log in from the Admin Login page.
 
-## Learn More
+![Imgur](https://i.imgur.com/em6E9sk.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Users List
+	This will take you to the main admin screen, which is a list of all the users.
+2. Users Table
+	Here you can find a list of all the clients in the system. You can see their names, email addresses and if they are active or not. And if you click on their names, it will take you to that client movements screen (see `Client Movements (admin)`).
+3. Pagination
+	 All the info is divided into multiple pages, using this pagination will help you browse through all the pages easily.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Client Movements (admin)
 
-### Code Splitting
+You can find this screen when you select a client to see their movements
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![Imgur](https://i.imgur.com/6o7EHya.png)
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+It is important to note here that this is screen is almost identical to what a Client would see when they log in, so you can remit to that section to know about what you can find here.

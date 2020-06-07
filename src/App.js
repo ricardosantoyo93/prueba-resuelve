@@ -19,6 +19,9 @@ import ClientAdmin from './components/admin/client';
 
 import './App.scss';
 
+/**
+ * Main component of the app, where the routes are defined
+ */
 const App = () => {
   return (
     <Router>

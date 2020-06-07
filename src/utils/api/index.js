@@ -2,6 +2,9 @@ import axios from 'axios';
 import md5 from 'md5';
 import jwt_decode from 'jwt-decode';
 
+/**
+ * API class meant for all the api calls in the app
+ */
 class API {
     instance = null;
 

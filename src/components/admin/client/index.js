@@ -13,6 +13,11 @@ import Pagination from '../../table/pagination';
 
 import './client.scss';
 
+/**
+ * Component to see a client movements given a uid (for admins)
+ * @param {Object} props 
+ * @param {Array} props.records User records to display the current user info
+ */
 const Client = ({ records }) => {
     let { p } = useParams();
     const { uid } = useParams();
@@ -37,19 +42,24 @@ const Client = ({ records }) => {
     const [currency, setCurrency] = useState('usd');
 
     p = !Number.isNaN(Number(p)) ? p : 1;
-    const loading = t('loading.label');
 
+    /**
+     * Fetching the client movements from the api
+     */
     const fetchClientMovements = async () => {
         const mov = await api.getClientMovements(ls.token, uid, p);
         if(mov) {
+            // Calling the currency api to know the values in whick I have to multiply
             const currency = await api.getCurrencyConversion();
 
+            // I create an array of objects whit just the info I actually need to be displayed
             const m = mov.records.map((item) => {
                 return {
                     amount: {
                         amount: true,
                         value: item.amount,
                         mxn: currency ? (item.amount * currency.usd2mxn).toFixed(2) : item.amount,
+                        // Since the original info is in USD, I only have to multiply to get the MXN value
                         usd: item.amount,
                         currency: "USD"
                     },
@@ -72,10 +82,15 @@ const Client = ({ records }) => {
         }
     };
 
+    // Calling the fetchClientMovements method after the component renders and every time the page changes
     useEffect(() => {
         fetchClientMovements();
     }, [p]);
 
+    /**
+     * Method to sort the movements info. It will trigger a re-render
+     * @param {String} key The name of the key of the content object
+     */
     const handleSort = (key) => {
         const sortedArray = movements.sort((a, b) => {
             if(key === "description") {
@@ -100,6 +115,7 @@ const Client = ({ records }) => {
         setOrder(order === "desc" ? "asc" : "desc");
     }
 
+    // Columns info to be sent to the Table component
     const columns = [
         {
             desc: t('amount.label'),
@@ -123,6 +139,7 @@ const Client = ({ records }) => {
         }
     ];
 
+    // This will re-render the table with the updated currency conversion
     const changeCurrency = () => {
         const newArray = movements.map((item) => {
             if(currency === "usd") {

@@ -11,9 +11,13 @@ import Pagination from '../table/pagination';
 import Table from '../table';
 
 import './admin.scss';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-const Admin = ({ saveCurrentInfo}) => {
+/**
+ * Admin dashboard, where the list of users will be displayed
+ * @param {Object} props
+ * @param {Function} props.saveCurrentInfo Redux action to save the current info into the state 
+ */
+const Admin = ({ saveCurrentInfo }) => {
     const { t } = useTranslation();
     let { p } = useParams();
     p = !Number.isNaN(Number(p)) ? p : 1;
@@ -23,9 +27,15 @@ const Admin = ({ saveCurrentInfo}) => {
     const [order, setOrder] = useState('asc');
     const [clients, setClients] = useState();
 
+    /**
+     * This method will call the API to get the user list, and will update the displayed table
+     */
     const updateTable = async () => {
         const userList = await api.getUserList(ls.token, p);
+
+        // If userList is defined, i.e. the call was successful
         if(userList) {
+            // I create an array of objects whit just the info I actually need to be displayed
             const cl = userList.records.map((item) => {
                 return {
                     name: { 
@@ -51,6 +61,7 @@ const Admin = ({ saveCurrentInfo}) => {
         return null;
     }
 
+    // Calling updateTable after rendering, and every time the page changes
     useEffect(() => {
         const fetchClients = async () => {
             const clients = await updateTable();
@@ -60,6 +71,11 @@ const Admin = ({ saveCurrentInfo}) => {
         fetchClients();
     }, [p]);
 
+    /**
+     * This will resort the table by a given key
+     * It will trigger a re-render of the table since the clients array is stored in the state
+     * @param {String} key The object key (name, email, etc...)
+     */
     const handleSort = (key) => {
         const sortedArray = clients.sort((a, b) => {
             if(key === "email") {
@@ -85,6 +101,9 @@ const Admin = ({ saveCurrentInfo}) => {
         setOrder(order === "desc" ? "asc" : "desc");
     }
 
+    /**
+     * Array of the columns info and metadata to send it to the Table component
+     */
     const columns = [
         {
             desc: t('name.label'),
