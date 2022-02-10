@@ -18,7 +18,7 @@
     "jwt-simple": "^0.5.6",
     "md5": "^2.2.1",
     "mdbreact": "^4.27.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-bootstrap-table-next": "^4.0.3",
